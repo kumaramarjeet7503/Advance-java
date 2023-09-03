@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <style>
+        .container
+        {
+            width : 20% ;
+            border: solid;
+            margin : auto ;
+            padding : 15px ;
+        }
+        </style>
+    <body>
+        <div class="container">
+            <form action="dashboard" method="post">
+            <div><h2>Login Form</h2></div>
+            <table>
+                <tr><td>Email : <input name ="user-email" type="email"> </td></tr>
+                <tr><td>Password : <input name ="user-password" type="password"> </td></tr>
+            </table>
+            <div class="text-right" >
+                <button type="reset">Reset</button>
+                  <button type="submit" style="float : right">Submit</button>
+            </div>
+            </form>
+         </div>
+    </body>
+</html>

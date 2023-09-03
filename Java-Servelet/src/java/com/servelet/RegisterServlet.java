@@ -37,8 +37,11 @@ public class RegisterServlet extends HttpServlet {
                out.println("<h5>Gender : "+gender+"</h5>");
                out.println("<h5>Course : "+course+"</h5>");
                out.println("<h5>Terms : "+terms+"</h5>");
+               // Set Request Attribute
                request.setAttribute("sum",sum) ;
-                RequestDispatcher rd = request.getRequestDispatcher("success");
+               
+
+                RequestDispatcher rd = request.getRequestDispatcher("login");
                 rd.forward(request,response);
            }else
            {

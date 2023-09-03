@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>Registration form</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -19,11 +19,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         }
         </style>
     <body>
-        <h2> Welcome to Home Page</h2> 
-           <ul>
-               <li><a href="register.html">Register</a></li>
-               <li><a href="login.html">Login</a></li>
-         </ul>
-        
+        <div class="container">
+            <form action="login" method="post">
+            <div><h2>Login Form</h2></div>
+            Welcome to Dashboard : 
+            <div class="text-right" >
+                <button type="reset">Reset</button>
+                  <button type="submit" style="float : right">Submit</button>
+            </div>
+            </form>
+         </div>
     </body>
 </html>
