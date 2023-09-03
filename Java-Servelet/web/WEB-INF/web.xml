@@ -10,11 +10,21 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>com.servelet.RegisterServlet</servlet-class>
     </servlet> 
+    
+    <servlet>
+        <servlet-name>Success</servlet-name>
+        <servlet-class>com.servelet.SuccessServlet</servlet-class>
+    </servlet> 
    
    <!--Servelet Mapping-->
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Success</servlet-name>
+        <url-pattern>/success</url-pattern>
     </servlet-mapping>
     
     <!--Welcome file List-->

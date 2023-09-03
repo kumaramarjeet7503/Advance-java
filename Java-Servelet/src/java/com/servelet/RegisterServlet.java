@@ -35,9 +35,13 @@ public class RegisterServlet extends HttpServlet {
                out.println("<h5>Gender : "+gender+"</h5>");
                out.println("<h5>Course : "+course+"</h5>");
                out.println("<h5>Terms : "+terms+"</h5>");
+                RequestDispatcher rd = request.getRequestDispatcher("success");
+                rd.forward(request,response);
            }else
            {
                 out.println("<h3>Please accept terms and conditions first </h3>");
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                rd.include(request,response);
            }
            
     }
