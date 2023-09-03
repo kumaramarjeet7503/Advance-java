@@ -17,6 +17,12 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     
+    <!--Welcome file List-->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <!--<welcome-file>home.html</welcome-file>-->
+    </welcome-file-list>
+    
     <session-config>
         <session-timeout>
             30
