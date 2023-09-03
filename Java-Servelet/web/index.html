@@ -9,7 +9,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <style>
+        .container
+        {
+            width : 20% ;
+            border: solid;
+            margin : auto ;
+            padding : 15px ;
+        }
+        </style>
     <body>
-        <div>TODO write content</div>
+        <div class="container">
+            <form action="register" method="post">
+            <div><h2>Registration Form</h2></div>
+            <table>
+                <tr><td>Name : <input name ="user-name" type="text"> </td></tr>
+                <tr><td>Email : <input name ="user-email" type="email"> </td></tr>
+                <tr><td>Password : <input name ="user-password" type="password"> </td></tr>
+                <tr><td>Gender : <input name ="user-gender" type="radio" value="Male">Male</input> <input name ="user-gender" value="Female" type="radio" >Female</input> </td></tr>
+                <tr><td>Course : <select name ="user-course" > 
+                        <option >Java</option>
+                        <option>Python</option>
+                        <option>PHP</option>
+                        <option>Javascript</option>
+                        </select>
+                    </td></tr>
+                 <tr><td><input name ="user-terms" value="checked"  type="checkbox">Please agree the Terms and Conditions.</input> </td></tr>
+            </table>
+            <div class="text-right" >
+                <button type="reset">Reset</button>
+                  <button type="submit" style="float : right">Submit</button>
+            </div>
+            </form>
+         </div>
     </body>
 </html>
