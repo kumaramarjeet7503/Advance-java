@@ -28,6 +28,8 @@ public class RegisterServlet extends HttpServlet {
            String course = request.getParameter("user-course");
            String terms = request.getParameter("user-terms");
            
+           int sum = 10 ;
+           
            if(terms != null){
                out.println("<h5>Name : "+name+"</h5>");
                out.println("<h5>email : "+email+"</h5>");
@@ -35,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
                out.println("<h5>Gender : "+gender+"</h5>");
                out.println("<h5>Course : "+course+"</h5>");
                out.println("<h5>Terms : "+terms+"</h5>");
+               request.setAttribute("sum",sum) ;
                 RequestDispatcher rd = request.getRequestDispatcher("success");
                 rd.forward(request,response);
            }else

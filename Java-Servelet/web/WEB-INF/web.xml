@@ -30,7 +30,6 @@
     <!--Welcome file List-->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-        <!--<welcome-file>home.html</welcome-file>-->
     </welcome-file-list>
     
     <session-config>

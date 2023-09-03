@@ -1,7 +1,6 @@
 package com.servelet;
 
 import java.io.PrintWriter;
-import javax.servlet.x;
 import javax.servlet.http.* ;
 import javax.servlet.ServletException ;
 import java.io.IOException ;
@@ -13,6 +12,6 @@ public class SuccessServlet extends HttpServlet {
     {
            response.setContentType("text/html") ;
            PrintWriter out = response.getWriter() ;
-           out.println("<h3>Welcome to Success Servlet.</h3>");
+           out.println("<h3>Welcome to Success Servlet. Sum : "+request.getAttribute("sum")+"</h3>");
     }
 }
