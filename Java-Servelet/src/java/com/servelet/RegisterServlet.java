@@ -37,12 +37,15 @@ public class RegisterServlet extends HttpServlet {
            
            String name = request.getParameter("user-name");
            String email = request.getParameter("user-email");
-           String password = request.getParameter("user-password");
-           RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-           
-//           int sum = 10 ;
-             // Set Request Attribute
-//            request.setAttribute("sum",sum) ; 
+           String password = request.getParameter("user-password");           
+           /*
+           For Request Dispatcher
+            RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
+           For Sending attribute
+            int sum = 10 ;
+            Set Request Attribute
+            request.setAttribute("sum",sum) ; 
+           */
             
             // Set Registration into database
             Connection connect = null ;
@@ -55,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             if(connect.isClosed())
             {
-                out.println("<h3>Error While Registration Please try again</h3>");
+                out.println("Failed");
             }else
             {
 
@@ -71,8 +74,7 @@ public class RegisterServlet extends HttpServlet {
 
                 pd.executeUpdate() ;
                 connect.close();
-                 out.println("<h3>Successfull</h3>");
-                  rd.include(request,response); 
+                 out.println("success");
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);

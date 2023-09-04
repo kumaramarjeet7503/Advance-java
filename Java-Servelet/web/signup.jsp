@@ -20,8 +20,9 @@
             <div class="col m6 offset-m3"> 
             <div class="card ">
                      <div class="card-content">
-                         <form class="center-align" method="post" action="register">
+                         <form class="center-align" method="post" action="register" id="register-form">
                              <h3 style="margin-top :5px" class="text-center">SignUp</h3>
+                             <p id="msg"></p>
                        
                             <div class="input-field ">
                               <input  id="user-name" name="user-name" type="text" class="validate">
@@ -35,10 +36,10 @@
                               <input  id="user-password" name="user-password" type="password" class="validate">
                               <label class="active" for="user-password">Password</label>
                             </div>
-                             <button type="submit" class="btn waves-effect waves-light" >SignUp</button>
+                             <button class="btn waves-effect waves-light" >SignUp</button>
                         </form>
                          
-                         <div class="loader center-align" style="margin-top: 10px; display: none">
+                         <div class="loader center-align" style="margin-top: 10px; display: none" id="loader">
                             <div class="preloader-wrapper big active ">
                                 <div class="spinner-layer spinner-blue">
                                   <div class="circle-clipper left">
@@ -61,5 +62,35 @@
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script>
+            $("#register-form").on('submit',function(event){
+                event.preventDefault();
+                $("#register-form").hide();
+                $("#loader").show() ;
+               
+               var f = $(this).serialize() ;
+               $.ajax({
+                   url:"register",
+                   data:f,
+                   type:'POST',
+                   success:function(response)
+                   {
+                        $("#register-form").show();
+                        $("#loader").hide() ;
+                        $("#msg").text("Registration Completed");
+                        $("#msg").css("color","green");
+                   },
+                   error:function(error)
+                   {
+                       sleep(3000);
+                       console.log(error);
+                        $("#register-form").show();
+                        $("#loader").hide() ;
+                        $("#msg").text("Failure! Please try again.");
+                        $("#msg").css("color","red");
+                   }
+               });
+            });
+        </script>
     </body>
 </html>
