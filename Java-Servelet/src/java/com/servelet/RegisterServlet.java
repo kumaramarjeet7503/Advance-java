@@ -9,16 +9,21 @@ import javax.servlet.http.* ;
 import java.io.IOException;
 import java.io.PrintWriter ;
 import com.jdbc.Connect;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.* ;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.LocalDate;
+import javax.servlet.annotation.MultipartConfig;
 /**
  *
  * @author amarj
  */
+ @MultipartConfig
 public class RegisterServlet extends HttpServlet {
     
     /**
@@ -29,7 +34,10 @@ public class RegisterServlet extends HttpServlet {
      * @throws IOException
      * @throws SQLException
      */
-    @Override 
+
+
+
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException
     {
            response.setContentType("text/html") ;
@@ -37,7 +45,9 @@ public class RegisterServlet extends HttpServlet {
            
            String name = request.getParameter("user-name");
            String email = request.getParameter("user-email");
-           String password = request.getParameter("user-password");           
+           String password = request.getParameter("user-password");   
+           Part part = request.getPart("user-image");
+           String fileName = part.getSubmittedFileName() ;
            /*
            For Request Dispatcher
             RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
@@ -51,7 +61,6 @@ public class RegisterServlet extends HttpServlet {
             Connection connect = null ;
                 try {
                     connect = Connect.getConnection();
-
                 } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -61,18 +70,30 @@ public class RegisterServlet extends HttpServlet {
                 out.println("Failed");
             }else
             {
-
+                // For getting local data and other records to insert
+                InputStream is = part.getInputStream() ;
+                byte[] byteFile =  new byte[is.available()] ;
+                is.read(byteFile);
+                
+                String filePath = request.getRealPath("/")+"image"+File.separator+fileName ;
+                out.println(filePath) ;
+//                FileOutputStream fos = new FileOutputStream(filePath) ;
+//                fos.write(byteFile) ;
+//                fos.close();
+                
+//                 For uploading file in java
                  LocalDate currentDate = LocalDate.now();
+                 
                 String query = "insert into user (Name,Email,Password,CreatedAt) values(?,?,?,?)" ;
                 PreparedStatement pd = connect.prepareStatement(query);
                
+//                Set Dynamic data into query
                 pd.setString(1,name);
-                 pd.setString(2,email);
-                  pd.setString(3,password);
+                pd.setString(2,email);
+                pd.setString(3,password);
                 pd.setString(4, currentDate.toString());
-//                 pd.setString(5, "6");
 
-                pd.executeUpdate() ;
+//                pd.executeUpdate() ;
                 connect.close();
                  out.println("success");
             }

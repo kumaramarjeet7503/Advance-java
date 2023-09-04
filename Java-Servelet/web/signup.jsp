@@ -36,6 +36,16 @@
                               <input  id="user-password" name="user-password" type="password" class="validate">
                               <label class="active" for="user-password">Password</label>
                             </div>
+                             <!--For File Input-->
+                                 <div class="file-field input-field">
+                                    <div class="btn">
+                                      <span>File</span>
+                                      <input type="file" name="user-image">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                      <input class="file-path validate" type="text">
+                                    </div>
+                                  </div>
                              <button class="btn waves-effect waves-light" >SignUp</button>
                         </form>
                          
@@ -68,10 +78,12 @@
                 $("#register-form").hide();
                 $("#loader").show() ;
                
-               var f = $(this).serialize() ;
+//               var f = $(this).serialize() ;
+//                For image type file
+                  let file = new FormData(this) ;
                $.ajax({
                    url:"register",
-                   data:f,
+                   data:file,
                    type:'POST',
                    success:function(response)
                    {
@@ -82,13 +94,14 @@
                    },
                    error:function(error)
                    {
-                       sleep(3000);
                        console.log(error);
                         $("#register-form").show();
                         $("#loader").hide() ;
                         $("#msg").text("Failure! Please try again.");
                         $("#msg").css("color","red");
-                   }
+                   },
+                   contentType:false,
+                   processData:false
                });
             });
         </script>
