@@ -24,18 +24,18 @@
                              <h3 style="margin-top :5px" class="text-center">SignUp</h3>
                        
                             <div class="input-field ">
-                              <input  id="user-name" type="text" class="validate">
+                              <input  id="user-name" name="user-name" type="text" class="validate">
                               <label class="active" for="user-name">Name</label>
                             </div>
                             <div class="input-field ">
-                              <input  id="user-email" type="email" class="validate">
+                              <input  id="user-email" name="user-email" type="email" class="validate">
                               <label class="active" for="user-email">Email</label>
                             </div>
                              <div class="input-field">
-                              <input  id="user-password" type="password" class="validate">
+                              <input  id="user-password" name="user-password" type="password" class="validate">
                               <label class="active" for="user-password">Password</label>
                             </div>
-                         <button class="btn waves-effect waves-light" >SignUp</button>
+                             <button type="submit" class="btn waves-effect waves-light" >SignUp</button>
                         </form>
                          
                          <div class="loader center-align" style="margin-top: 10px; display: none">

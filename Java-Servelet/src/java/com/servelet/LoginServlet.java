@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.jdbc.Connect ;
+import java.time.LocalDate;
 
 /**
  *
@@ -44,23 +46,19 @@ public class LoginServlet extends HttpServlet {
            
             out.println("<h1>dslkf</h1>");
                     
-                Class.forName("com.mysql.cj.jdbc.Driver") ;
-//                
-                String url = "jdbc:mysql://127.0.0.1:3306/java" ;
-                String user = "root";
-                String password = "" ;
-                
-                Connection con = DriverManager.getConnection(url,user,password) ;
-                if(con.isClosed())
+                Connection connect = Connect.getConnection() ;
+                if(connect.isClosed())
                 {
                     out.println("<h1>Connection Failed</h1>");
                 }else
                 {
-                       out.println("<h1>Hurray !</h1>");
-                       String query = "insert into user(Name,Email,Password) values('Amarjeet','kumar','xtreme')" ;
-                       PreparedStatement  pd = con.prepareStatement(query) ;
+                       LocalDate currentDate = LocalDate.now();
+                       String query = "insert into user(Name,Email,Password,CreatedAt) values('ABC','amarjeet@123','xtreme',?)" ;
+                       PreparedStatement  pd = connect.prepareStatement(query) ;
+                       pd.setString(1, currentDate.toString());
                        pd.executeUpdate() ;
-                       con.close();
+                       connect.close();
+                       out.println("<h1>Hurray !</h1>");
                 }
             
             out.println("</body>");

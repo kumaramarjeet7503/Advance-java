@@ -8,48 +8,78 @@ import javax.servlet.* ;
 import javax.servlet.http.* ;
 import java.io.IOException;
 import java.io.PrintWriter ;
+import com.jdbc.Connect;
+import java.sql.* ;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.time.LocalDate;
 /**
  *
  * @author amarj
  */
 public class RegisterServlet extends HttpServlet {
     
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws SQLException
+     */
     @Override 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException
     {
            response.setContentType("text/html") ;
            PrintWriter out = response.getWriter() ;
-           out.println("<h3>Welcome to Register Servlet.</h3>");
            
            String name = request.getParameter("user-name");
            String email = request.getParameter("user-email");
            String password = request.getParameter("user-password");
-           String gender = request.getParameter("user-gender");
-           String course = request.getParameter("user-course");
-           String terms = request.getParameter("user-terms");
+           RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
            
-           int sum = 10 ;
-           
-           if(terms != null){
-               out.println("<h5>Name : "+name+"</h5>");
-               out.println("<h5>email : "+email+"</h5>");
-               out.println("<h5>Password : "+password+"</h5>");
-               out.println("<h5>Gender : "+gender+"</h5>");
-               out.println("<h5>Course : "+course+"</h5>");
-               out.println("<h5>Terms : "+terms+"</h5>");
-               // Set Request Attribute
-               request.setAttribute("sum",sum) ;
-               
+//           int sum = 10 ;
+             // Set Request Attribute
+//            request.setAttribute("sum",sum) ; 
+            
+            // Set Registration into database
+            Connection connect = null ;
+                try {
+                    connect = Connect.getConnection();
 
-                RequestDispatcher rd = request.getRequestDispatcher("login");
-                rd.forward(request,response);
-           }else
-           {
-                out.println("<h3>Please accept terms and conditions first </h3>");
-                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-                rd.include(request,response);
-           }
-           
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        try {
+            if(connect.isClosed())
+            {
+                out.println("<h3>Error While Registration Please try again</h3>");
+            }else
+            {
+
+                 LocalDate currentDate = LocalDate.now();
+                String query = "insert into user (Name,Email,Password,CreatedAt) values(?,?,?,?)" ;
+                PreparedStatement pd = connect.prepareStatement(query);
+               
+                pd.setString(1,name);
+                 pd.setString(2,email);
+                  pd.setString(3,password);
+                pd.setString(4, currentDate.toString());
+//                 pd.setString(5, "6");
+
+                pd.executeUpdate() ;
+                connect.close();
+                 out.println("<h3>Successfull</h3>");
+                  rd.include(request,response); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+                     
     }
     
 }
