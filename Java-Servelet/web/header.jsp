@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +14,8 @@
     </head>
     <body >
         <div class="row col-md-12" style="background: red; margin: auto">
-        <h1>Header</h1>
+            <c:set var="head" value="Header" ></c:set>
+            <h1><c:out value= "${head}" ></c:out></h1>
         </div>
     </body>
 </html>
