@@ -1,11 +1,11 @@
 <%-- 
     Document   : error
-    Created on : Sep 6, 2023, 12:09:17 AM
+    Created on : Sep 6, 2023, 7:24:45 AM
     Author     : amarj
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page isErrorPage="true" %>
+<%@page isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +13,8 @@
         <title>Error</title>
     </head>
     <body>
-        <h1>Something went wrong! Please check</h1>
+        <div class="container">
+            <img src="image/error_404.jpg" alt="alt"/>
+            </div>
     </body>
 </html>

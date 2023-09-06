@@ -30,10 +30,6 @@
         <servlet-name>Success</servlet-name>
         <url-pattern>/success</url-pattern>
     </servlet-mapping>
-    <!--Welcome file List-->
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -46,6 +42,15 @@
         <servlet-name>ReportServlet</servlet-name>
         <url-pattern>/report</url-pattern>
     </servlet-mapping>
+        <!--Welcome file List-->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <!--Error file-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30
