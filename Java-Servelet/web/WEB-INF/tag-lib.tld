@@ -23,5 +23,9 @@
   <tag>
       <name>tag1</name>
       <tag-class>com.tag.TagHandler</tag-class>
+      <attribute>
+          <name>number</name>
+          <required>true</required>
+      </attribute>
   </tag>
 </taglib>

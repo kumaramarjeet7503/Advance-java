@@ -14,6 +14,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <t:tag1></t:tag1>
+        <t:tag1 number="23"></t:tag1>
     </body>
 </html>
