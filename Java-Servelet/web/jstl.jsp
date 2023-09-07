@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +18,7 @@
         <!--Jstl set--> 
         <c:set var="i" value="12" ></c:set>
         <c:set var="k" value="10"></c:set>
+         <c:set var="m" value="Amarjeet"></c:set>
         <!--Jstl out-->
         <c:out value="${i}"></c:out>
         <c:remove var="i"></c:remove>
@@ -24,11 +26,13 @@
         <c:if var="k" test="${k == 1}" >
             <h2>Successfull enter jstl and used if tag </h2>
         </c:if>
+            <!--Jstl function tag-->
+        <c:out value="${fn:length(m)}"></c:out>
         <!--Jstl looping tag-->
         <c:forEach var="p" begin="1" end="10" >
             <h1> The selected number is <c:out value="${p}"></c:out> </h1>
         </c:forEach>
             <!--Jstl redirect tag-->
-        <c:redirect url="https:www.google.com"></c:redirect>
+        <%--<c:redirect url="https:www.google.com"></c:redirect>--%>
     </body>
 </html>
