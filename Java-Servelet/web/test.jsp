@@ -20,5 +20,7 @@
         <p>My name is <%= name%></p>
         <p>Today's Date is <%= new Date().toString() %></p>
         <p>Division <% int a = 25/0 ; %> </p>
+        
+    
     </body>
 </html>
