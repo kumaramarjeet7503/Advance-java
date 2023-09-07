@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <!--servlet description-->
+    <filter>
+        <filter-name>Filter1</filter-name>
+        <filter-class>com.filter.Filter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter1</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>com.servelet.RegisterServlet</servlet-class>
@@ -42,7 +50,7 @@
         <servlet-name>ReportServlet</servlet-name>
         <url-pattern>/report</url-pattern>
     </servlet-mapping>
-        <!--Welcome file List-->
+    <!--Welcome file List-->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

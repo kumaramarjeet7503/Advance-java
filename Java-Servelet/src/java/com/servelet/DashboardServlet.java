@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie ;
-
+import javax.servlet.http.HttpSession ;
 
 /**
  *
@@ -41,6 +41,7 @@ public class DashboardServlet extends HttpServlet {
             }
             
             String name = request.getParameter("user-email");
+                HttpSession session = request.getSession(false);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -49,7 +50,7 @@ public class DashboardServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DashboardServlet at " + request.getContextPath() + "</h1>");
-            out.print("<h4>Hello "+name+", Welcome to Dashboard</h4>");
+            out.print("<h4>Hello "+session.getAttribute("name") +", Welcome to Dashboard</h4>");
             out.println("<a href= 'report' >Goto Report</a>");
             out.println("</body>");
             out.println("</html>");

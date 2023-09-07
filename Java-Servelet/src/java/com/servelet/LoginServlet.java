@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.jdbc.Connect ;
 import java.time.LocalDate;
+import javax.servlet.http.HttpSession ;
 
 /**
  *
@@ -35,6 +36,7 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -43,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<title>Servlet LoginServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-           
+           out.println("Hello "+ session.getAttribute("name") );
             out.println("<h1>dslkf</h1>");
                     
                 Connection connect = Connect.getConnection() ;
