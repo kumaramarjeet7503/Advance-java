@@ -30,6 +30,12 @@
         <servlet-name>ReportServlet</servlet-name>
         <servlet-class>com.servelet.ReportServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <jsp-file>/jstl.jsp</jsp-file>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -49,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>ReportServlet</servlet-name>
         <url-pattern>/report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+     <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/jstl</url-pattern>
     </servlet-mapping>
     <!--Welcome file List-->
     <welcome-file-list>
