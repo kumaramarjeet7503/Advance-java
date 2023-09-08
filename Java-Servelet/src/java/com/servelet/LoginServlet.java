@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.jdbc.Connect ;
+import com.tech.blog.helper.Connect ;
 import java.time.LocalDate;
 import javax.servlet.http.HttpSession ;
 

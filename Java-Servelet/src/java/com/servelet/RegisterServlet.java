@@ -8,7 +8,7 @@ import javax.servlet.* ;
 import javax.servlet.http.* ;
 import java.io.IOException;
 import java.io.PrintWriter ;
-import com.jdbc.Connect;
+import com.tech.blog.helper.Connect;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;

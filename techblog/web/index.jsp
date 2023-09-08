@@ -22,7 +22,7 @@
                 <h1 class="display-3" >Welcome to Techblog</h1>
                 <p>We are here for the help</p>
                 <button class="btn btn-outline-light btn-lg" >Get Started!</button>
-                <button class="btn btn-outline-light btn-lg" ><span class="fa fa-user pr-1"></span>Login</button>
+                <a href="login.jsp" class="btn btn-outline-light btn-lg" ><span class="fa fa-user pr-1"></span>Login</a>
             </div>
             </div>
             
