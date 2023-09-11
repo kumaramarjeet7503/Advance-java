@@ -17,7 +17,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
 
+@MultipartConfig
 public class SignUpServlet extends HttpServlet {
     
     /**
@@ -41,14 +43,15 @@ public class SignUpServlet extends HttpServlet {
            String name = request.getParameter("user-name");
            String email = request.getParameter("user-email");
            String password = request.getParameter("user-password");  
+           out.println(password);
            Date date = new Date() ;
            Timestamp createdAt = new Timestamp(date.getTime()) ;
            User user = new User(name,email,password,createdAt) ;
         
            UserDao userDao = new UserDao(ConnectionProvider.getConnection()) ;
-           boolean save = userDao.saveUser(user,ConnectionProvider.getConnection()) ;
-                out.println(save);
-           if(save )
+//           boolean save = userDao.saveUser(user,ConnectionProvider.getConnection()) ;
+            boolean save1 = true ;
+           if(save1 )
             {
                 out.println("Success");
             } 
