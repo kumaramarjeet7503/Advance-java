@@ -16,6 +16,7 @@ import com.tech.blog.helper.ConnectionProvider;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author amarj
@@ -47,8 +48,12 @@ public class LoginServlet extends HttpServlet {
            if(user == null)
            {
                response.sendRedirect("login.jsp");
+               HttpSession session = request.getSession() ;
+               session.setAttribute("msg","Invalid Credentials! Please try again");
            }else
            {
+               HttpSession session = request.getSession() ;
+               session.setAttribute("currentUser",user);
                response.sendRedirect("profile.jsp");
            }
         }

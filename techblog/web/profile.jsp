@@ -4,6 +4,7 @@
     Author     : amarj
 --%>
 
+<%@page import="com.tech.blog.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,11 @@
         <title>profile</title>
     </head>
     <body>
-        <h1>Your profile is</h1>
+        <%
+            User user = (User) session.getAttribute("currentUser");
+            if(user == null) response.sendRedirect("signup.jsp"); 
+        %>
+        <h1>Your profile</h1>
+        <h3>Email : <%= user.getEmail() %></h3>
     </body>
 </html>
