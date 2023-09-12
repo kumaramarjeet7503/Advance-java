@@ -15,7 +15,7 @@ public class UserDao {
     public UserDao(Connection connect) {
     }
     private Connection conn ;
-    private User user ;
+//    private User user ;
     
     public void UserDao(Connection connect) 
     {
@@ -44,18 +44,19 @@ public class UserDao {
         return flag ;
     }
     
-    public User getUserByEmailAndPassword(String email, String password)
+    public User getUserByEmailAndPassword(String email, String password , Connection conn)
     {
+        User user = null ;
         try{
             String query = "select * from user where Email = ? and Password = ?" ;
              PreparedStatement pstm = conn.prepareStatement(query) ;
              pstm.setString(1,email);
              pstm.setString(2,password);
              
-             ResultSet set  = pstm.executeQuery(query) ;
+             ResultSet set  = pstm.executeQuery() ;
              if(set.next())
              {
-                 User user = new User() ;
+                  user = new User() ;
                  user.setName(set.getString("Name")) ;
                  user.setPassword(set.getString("Password")) ;
                  user.setEmail(set.getString("Email")) ;

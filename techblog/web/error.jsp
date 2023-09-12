@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +19,7 @@
        <div class="container text-center">
            <img class="image-fluid" src="images/error.png"></img>
            <h1 class="display-3">Oops! Something went wrong</h1>
+           <%= exception %>
            <a class="btn btn-primary btn-lg mt-2" href="index.jsp">Home</a> 
        </div>
         
