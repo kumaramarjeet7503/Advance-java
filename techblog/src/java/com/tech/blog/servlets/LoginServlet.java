@@ -5,6 +5,7 @@
 package com.tech.blog.servlets;
 
 import com.tech.blog.dao.UserDao;
+import com.tech.blog.entities.Message;
 import com.tech.blog.entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,9 +48,11 @@ public class LoginServlet extends HttpServlet {
             out.println(user);
            if(user == null)
            {
+                HttpSession session = request.getSession() ;
+                Message msg = new Message("Invalid Credentials! Please try again","error","alert-danger");
+               session.setAttribute("msg",msg);
                response.sendRedirect("login.jsp");
-               HttpSession session = request.getSession() ;
-               session.setAttribute("msg","Invalid Credentials! Please try again");
+
            }else
            {
                HttpSession session = request.getSession() ;

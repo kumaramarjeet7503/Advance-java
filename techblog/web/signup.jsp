@@ -61,7 +61,6 @@
             });
             $("#signup-form").on('submit',function(event){
                 event.preventDefault();
-                console.log("heloo");
                 let form = new FormData(this) ;
                 $.ajax({
                     url:"signup",
