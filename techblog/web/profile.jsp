@@ -50,7 +50,7 @@
                 
                   <ul class="navbar-nav mr-right">
                     <li class="nav-item">
-                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"> <span class="fa fa-user-circle "></span> <%= user.getName()%> </a>
+                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#profileModal"> <span class="fa fa-user-circle "></span> <%= user.getName()%> </a>
                     </li>
 
                     <li class="nav-item">
@@ -60,6 +60,52 @@
             </div>
           </nav>
 
+                   
+
+<!-- Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title" id="profileModalLabel">Profile Overview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="container text-center">
+              <h3><%= user.getName() %></h3>
+              
+              <table class="table">
+  <tbody>
+          <tr>
+      <th scope="row">Customer Id</th>
+      <td><%=user.getUserId()%></td>
+  
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%=user.getEmail()%></td>
+ 
+    </tr>
+    <tr>
+      <th scope="row">Registered On</th>
+      <td><%=user.getCreatedAt()%></td>
+    </tr>
+
+  </tbody>
+</table>
+              
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+                    
         <h1>Your profile</h1>
         <h3>Email : <%= user.getEmail() %></h3>
         

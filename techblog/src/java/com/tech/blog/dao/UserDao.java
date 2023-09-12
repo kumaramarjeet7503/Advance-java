@@ -61,6 +61,7 @@ public class UserDao {
                  user.setPassword(set.getString("Password")) ;
                  user.setEmail(set.getString("Email")) ;
                  user.setCreatedAt(set.getTimestamp("CreatedAt")) ;
+                 user.setUserId(set.getString("UserId")) ;
                  
              }
              

@@ -5,6 +5,7 @@ public class User {
     private String Email ;
     private String Password ;
     private Timestamp CreatedAt ;
+    private String UserId ;
     
         public User(String name, String  email, String password, Timestamp createdAt)
         {
@@ -51,6 +52,16 @@ public class User {
         public Timestamp getCreatedAt()
         {
             return CreatedAt ;
+        }
+        
+        public String getUserId()
+        {
+            return UserId ;
+        }
+            
+        public void setUserId(String userId)
+        {
+             this.UserId = userId ;
         }
     
     }
