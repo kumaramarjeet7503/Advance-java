@@ -62,49 +62,82 @@
 
                    
 
-<!-- Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title" id="profileModalLabel">Profile Overview</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <div class="container text-center">
-              <h3><%= user.getName() %></h3>
-              
-              <table class="table">
-  <tbody>
-          <tr>
-      <th scope="row">Customer Id</th>
-      <td><%=user.getUserId()%></td>
-  
-    </tr>
-    <tr>
-      <th scope="row">Email</th>
-      <td><%=user.getEmail()%></td>
- 
-    </tr>
-    <tr>
-      <th scope="row">Registered On</th>
-      <td><%=user.getCreatedAt()%></td>
-    </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-primary">
+                        <h5 class="modal-title" id="profileModalLabel">Profile Overview</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="container text-center">
+                              <h3><%= user.getName() %></h3>
 
-  </tbody>
-</table>
-              
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+                              <div id="profile-overview">
+                              <table class="table">
+                                <tbody>
+                                        <tr>
+                                    <th scope="row">Customer Id</th>
+                                    <td><%=user.getUserId()%></td>
+
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Email</th>
+                                    <td><%=user.getEmail()%></td>
+
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Registered On</th>
+                                    <td><%=user.getCreatedAt()%></td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+                    </div>
+
+                    <div id="profile-edit" style="display : none">
+                           <h3  id="edit-profile">Edit the form carefully</h3>
+                           <form >
+                                                            <table class="table">
+                                 <tbody>
+                                         <tr>
+                                     <th scope="row">Customer Id</th>
+                                     <td><input class="form-control" type="text" value=<%=user.getUserId()%> disabled ></td>
+
+                                   </tr>
+                                   <tr>
+                                     <th scope="row">Name</th>
+                                     <td><input class="form-control" type="text" value=<%=user.getName()%> ></td>
+
+                                   </tr>
+                                   <tr>
+                                     <th scope="row">Email</th>
+                                     <td><input class="form-control" type="text" value=<%=user.getEmail()%> ></td>
+
+                                   </tr>
+                                   <tr>
+                                     <th scope="row">Registered On</th>
+                                     <td><input class="form-control" type="date" value=<%=user.getCreatedAt()%>></td>
+                                   </tr>
+                                       
+                                 </tbody>
+                               </table>
+                                   <a class="btn btn-primary" href="edit">Save</a>
+                           </form>
+                    </div>
+
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="profile-toggle" class="btn btn-primary">Edit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                     
         <h1>Your profile</h1>
         <h3>Email : <%= user.getEmail() %></h3>
@@ -113,5 +146,24 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            var  toggle = false ;
+            $('#profile-toggle').click(function(){
+                if(!toggle){
+                    $('#profile-edit').show() ;
+                 $('#profile-overview').hide() ;
+                 $('#profile-toggle').text("Back") ;
+                 toggle = true ;
+                }else
+                {
+                 $('#profile-edit').hide() ;
+                 $('#profile-overview').show() ;
+                 $('#profile-toggle').text("Edit") ;
+                    toggle = false ;
+                }
+                 
+            }) ;
+
+        </script>
     </body>
 </html>
