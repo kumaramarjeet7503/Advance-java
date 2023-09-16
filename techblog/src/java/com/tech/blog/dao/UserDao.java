@@ -56,18 +56,38 @@ public class UserDao {
              ResultSet set  = pstm.executeQuery() ;
              if(set.next())
              {
-                  user = new User() ;
+                 user = new User() ;
                  user.setName(set.getString("Name")) ;
                  user.setPassword(set.getString("Password")) ;
                  user.setEmail(set.getString("Email")) ;
                  user.setCreatedAt(set.getTimestamp("CreatedAt")) ;
                  user.setUserId(set.getString("UserId")) ;
-                 
              }
              
         }catch(SQLException e)
         {
         }
         return user ;
+    }
+    
+    public boolean updateUser(User user, Connection conn)
+    {
+        boolean flag =false ;
+        
+        try{
+            String query = "update user set Name = ?, Password = ? where UserId = ? " ;
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setString(1,user.getName());
+            pstm.setString(2,user.getPassword());
+            pstm.setString(3, user.getUserId());
+            pstm.executeUpdate();
+            flag = true ;
+        }
+        catch(SQLException e)
+        {
+            
+        }
+        
+        return flag ;
     }
 }

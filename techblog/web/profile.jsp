@@ -100,32 +100,38 @@
 
                     <div id="profile-edit" style="display : none">
                            <h3  id="edit-profile">Edit the form carefully</h3>
-                           <form >
-                                                            <table class="table">
+                           <form action="update" method="POST" >
+                                <table class="table">
                                  <tbody>
                                          <tr>
                                      <th scope="row">Customer Id</th>
-                                     <td><input class="form-control" type="text" value=<%=user.getUserId()%> disabled ></td>
+                                     <td><input class="form-control" name="user-id" type="text" value=<%=user.getUserId()%> readonly ></td>
 
                                    </tr>
                                    <tr>
                                      <th scope="row">Name</th>
-                                     <td><input class="form-control" type="text" value=<%=user.getName()%> ></td>
-
+                                     <td><input class="form-control" name ="update-user-name" type="text" value=<%=user.getName()%> ></td>
                                    </tr>
                                    <tr>
                                      <th scope="row">Email</th>
-                                     <td><input class="form-control" type="text" value=<%=user.getEmail()%> ></td>
-
+                                     <td><input class="form-control" name ="update-user-email" type="text" value=<%=user.getEmail()%> ></td>
+                                   </tr>
+<!--                                    <tr>
+                                     <th scope="row">Photo</th>
+                                     <td> <input type="file" class="form-control-file" id="user-photo"></td>
+                                   </tr>
+                                   <tr>-->
+                                     <th scope="row">Password</th>
+                                     <td> <input type="text" name ="update-user-password"  value=<%=user.getPassword()%>  class="form-control" ></td>
                                    </tr>
                                    <tr>
                                      <th scope="row">Registered On</th>
-                                     <td><input class="form-control" type="date" value=<%=user.getCreatedAt()%>></td>
+                                     <td><input class="form-control"  type="date" value=<%=user.getCreatedAt()%>></td>
                                    </tr>
                                        
                                  </tbody>
                                </table>
-                                   <a class="btn btn-primary" href="edit">Save</a>
+                                   <button class="btn btn-primary" type="submit" >Save</button>
                            </form>
                     </div>
 
