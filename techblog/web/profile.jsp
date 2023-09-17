@@ -4,7 +4,12 @@
     Author     : amarj
 --%>
 
+<%@page import="com.tech.blog.entities.Category"%>
+<%@page import="com.tech.blog.helper.ConnectionProvider"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tech.blog.entities.Message"%>
 <%@page import="com.tech.blog.entities.User"%>
+<%@page import="com.tech.blog.dao.PostDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <%
             User user = (User) session.getAttribute("currentUser");
@@ -46,6 +51,9 @@
                     <a class="dropdown-item" href="#">Data Structures & Algorithm</a>
                   </div>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"  data-toggle="modal" data-target="#postModal" ><i class="fa fa-vcard p-1"></i>Post</a>
+                </li>
               </ul>
                 
                   <ul class="navbar-nav mr-right">
@@ -54,20 +62,24 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="logout"> <span class="fa fa-user-plus "></span> Logout</a>
+                        <a class="nav-link" href="logout"> <span class="fa fa-sign-out "></span> Logout</a>
                     </li>
                 </ul>
             </div>
           </nav>
 
-                   
+                    <%    Message msg = (Message) session.getAttribute("msg") ; if(msg != null){   %>
+                    <div class="alert <%= msg.getClass() %>" role="alert">
+                        <%= msg.getContent() %>
+                      </div>
+                    <% session.removeAttribute("msg") ; } %>
 
-                <!-- Modal -->
+                <!-- Profile  Modal -->
                 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header bg-primary">
-                        <h5 class="modal-title" id="profileModalLabel">Profile Overview</h5>
+                        <h5 class="modal-title text-white" id="profileModalLabel">Profile Overview</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -146,6 +158,50 @@
                   </div>
                 </div>
                     
+                <!--Post Modal-->     
+                <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white" id="postModalLabel">Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                             
+                    <div class="container text-center">
+                        <div id="post-edit">
+                            <label  id="post-profile" style="float: left;">Do post your article</label>
+                               <form action="post" method="POST" enctype="multipart/form-data" > 
+                                        <% 
+                                            PostDao postDao = new PostDao() ;
+                                            ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
+                                        %>
+                                   <select class="form-control form-group " >
+                                       <option selected disabled>Please select a category</option>
+                                       <% for(Category cat : categories){ %>
+                                       <option><%= cat.getName() %></option>
+                                       <% }%>
+                                   </select>
+                                    <input class="form-group form-control" name="post-title" type="text"  placeholder="Please enter the title" >
+                                    <textarea  class=" form-group form-control" name ="post-content" type="textarea" rows="4" placeholder="Please enter the content"  ></textarea>
+                                    <textarea  class="form-group form-control" name ="post-description type="textarea" rows="4" placeholder="Please enter the description"  ></textarea>
+                                    <input type="file" class="form-group form-control-file" name="post-photo">  
+                               </form>
+                        </div>
+                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="post-toggle" class="btn btn-primary">Post</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    
+                
+                                   
         <h1>Your profile</h1>
         <h3>Email : <%= user.getEmail() %></h3>
         
@@ -174,3 +230,6 @@
         </script>
     </body>
 </html>
+
+
+

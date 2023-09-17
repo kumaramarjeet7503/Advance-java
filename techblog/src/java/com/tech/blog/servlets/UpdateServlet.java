@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.tech.blog.entities.User ;
 import com.tech.blog.dao.UserDao ;
+import com.tech.blog.entities.Message;
 import com.tech.blog.helper.ConnectionProvider;
 import com.tech.blog.helper.FileHelper;
 import java.io.File;
@@ -77,6 +78,9 @@ public class UpdateServlet extends HttpServlet {
                }
                String path = request.getRealPath("/")+"pics"+File.separator+user.getImageName() ;   
                boolean uploaded = FileHelper.uploadFile(part.getInputStream(), path);
+                
+               Message msg = new Message("Profile Updated successfully","success","alert-success");
+               session.setAttribute("msg",msg);
            }
            response.sendRedirect("profile.jsp");
         }
