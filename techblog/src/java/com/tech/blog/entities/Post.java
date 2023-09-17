@@ -9,20 +9,26 @@ public class Post {
     private String Code ;
     private Timestamp CreatedDate ;
     private int Cid ;
+    private int UserId ;
+    private String Image ;
 
-    public Post(int Id, String Title, String Content, String Code, int Cid) {
+    public Post(int Id, String Title, String Content, String Code, int Cid, int UserId, String Image) {
         this.Id = Id;
         this.Title = Title;
         this.Content = Content;
         this.Code = Code;
         this.Cid = Cid;
+        this.UserId = UserId ;
+        this.Image = Image ;
     }
 
-    public Post(String Title, String Content, String Code, int Cid) {
+    public Post(String Title, String Content, String Code, int Cid, int UserId, String Image) {
         this.Title = Title;
         this.Content = Content;
         this.Code = Code;
         this.Cid = Cid;
+        this.UserId = UserId ;
+        this.Image = Image ;
     }
 
     public int getId() {
@@ -71,6 +77,22 @@ public class Post {
 
     public void setCid(int Cid) {
         this.Cid = Cid;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int UserId) {
+        this.UserId = UserId;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
     }
     
 

@@ -12,6 +12,10 @@
         <servlet-name>UpdateServlet</servlet-name>
         <servlet-class>com.tech.blog.servlets.UpdateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>com.tech.blog.servlets.PostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>UpdateServlet</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/dopost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

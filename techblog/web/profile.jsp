@@ -13,7 +13,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <%
             User user = (User) session.getAttribute("currentUser");
-            if(user == null) response.sendRedirect("login.jsp"); 
+            if(user == null || session == null)
+            { 
+                response.sendRedirect("login.jsp");
+            } 
         %>
 <!DOCTYPE html>
 <html>
@@ -171,30 +174,33 @@
                       <div class="modal-body">
                              
                     <div class="container text-center">
+                       <%  if(msg != null){ %>
+                            <div class="alert <%= msg.getClass() %>" role="alert"></div>
+                            <%  session.removeAttribute("msg"); } %>
                         <div id="post-edit">
                             <label  id="post-profile" style="float: left;">Do post your article</label>
-                               <form action="post" method="POST" enctype="multipart/form-data" > 
+                            <form id="dopost"  action="dopost"  method="post" enctype="multipart/form-data" > 
                                         <% 
                                             PostDao postDao = new PostDao() ;
                                             ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
                                         %>
-                                   <select class="form-control form-group " >
+                                   <select name="post-category" class="form-control form-group " >
                                        <option selected disabled>Please select a category</option>
                                        <% for(Category cat : categories){ %>
-                                       <option><%= cat.getName() %></option>
+                                       <option value="<%= cat.getId()%>"><%= cat.getName() %></option>
                                        <% }%>
                                    </select>
                                     <input class="form-group form-control" name="post-title" type="text"  placeholder="Please enter the title" >
                                     <textarea  class=" form-group form-control" name ="post-content" type="textarea" rows="4" placeholder="Please enter the content"  ></textarea>
-                                    <textarea  class="form-group form-control" name ="post-description type="textarea" rows="4" placeholder="Please enter the description"  ></textarea>
+                                    <textarea  class="form-group form-control" name ="post-description"textarea" rows="4" placeholder="Please enter the description"  ></textarea>
                                     <input type="file" class="form-group form-control-file" name="post-photo">  
+                                     <button type="submit" class="btn btn-primary">Post</button>
                                </form>
                         </div>
                     </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" id="post-toggle" class="btn btn-primary">Post</button>
                       </div>
                     </div>
                   </div>
@@ -205,29 +211,10 @@
         <h1>Your profile</h1>
         <h3>Email : <%= user.getEmail() %></h3>
         
-                 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>
-            var  toggle = false ;
-            $('#profile-toggle').click(function(){
-                if(!toggle){
-                    $('#profile-edit').show() ;
-                 $('#profile-overview').hide() ;
-                 $('#profile-toggle').text("Back") ;
-                 toggle = true ;
-                }else
-                {
-                 $('#profile-edit').hide() ;
-                 $('#profile-overview').show() ;
-                 $('#profile-toggle').text("Edit") ;
-                    toggle = false ;
-                }
-                 
-            }) ;
-
-        </script>
+        <script src="js/profile.js"></script>
     </body>
 </html>
 
