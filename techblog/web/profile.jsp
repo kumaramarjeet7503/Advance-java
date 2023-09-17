@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <%
             User user = (User) session.getAttribute("currentUser");
-            if(user == null) response.sendRedirect("signup.jsp"); 
+            if(user == null) response.sendRedirect("login.jsp"); 
         %>
 <!DOCTYPE html>
 <html>
@@ -74,10 +74,11 @@
                       </div>
                       <div class="modal-body">
                           <div class="container text-center">
+                              <img src="pics/<%= user.getImageName()%>" class="img-fluid" style="border-radius:50%;max-width: 150px;;"  >
                               <h3><%= user.getName() %></h3>
 
                               <div id="profile-overview">
-                              <table class="table">
+                              <table class="table text-left">
                                 <tbody>
                                         <tr>
                                     <th scope="row">Customer Id</th>
@@ -99,9 +100,9 @@
                     </div>
 
                     <div id="profile-edit" style="display : none">
-                           <h3  id="edit-profile">Edit the form carefully</h3>
-                           <form action="update" method="POST" >
-                                <table class="table">
+                           <label  id="edit-profile">Edit the form carefully</label>
+                           <form action="update" method="POST" enctype="multipart/form-data" >
+                                <table class="table text-left">
                                  <tbody>
                                          <tr>
                                      <th scope="row">Customer Id</th>
@@ -116,11 +117,11 @@
                                      <th scope="row">Email</th>
                                      <td><input class="form-control" name ="update-user-email" type="text" value=<%=user.getEmail()%> ></td>
                                    </tr>
-<!--                                    <tr>
+                                    <tr>
                                      <th scope="row">Photo</th>
-                                     <td> <input type="file" class="form-control-file" id="user-photo"></td>
+                                     <td> <input type="file" class="form-control-file" name="user-photo"></td>
                                    </tr>
-                                   <tr>-->
+                                   <tr>
                                      <th scope="row">Password</th>
                                      <td> <input type="text" name ="update-user-password"  value=<%=user.getPassword()%>  class="form-control" ></td>
                                    </tr>

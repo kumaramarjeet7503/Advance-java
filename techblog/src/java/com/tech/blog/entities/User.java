@@ -6,6 +6,7 @@ public class User {
     private String Password ;
     private Timestamp CreatedAt ;
     private String UserId ;
+    private String Image ;
     
         public User(String name, String  email, String password, Timestamp createdAt)
         {
@@ -62,6 +63,16 @@ public class User {
         public void setUserId(String userId)
         {
              this.UserId = userId ;
+        }
+        
+        public String getImageName()
+        {
+            return Image ;
+        }
+            
+        public void setImageName(String imageName)
+        {
+             this.Image = imageName ;
         }
     
     }

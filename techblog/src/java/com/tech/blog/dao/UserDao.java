@@ -26,8 +26,7 @@ public class UserDao {
     {
         boolean flag = false ;
 
-        try{
-            
+        try{  
             String query = "insert into user(Name,Password,Email) values(?,?,?)" ;
             PreparedStatement pstm = conn.prepareStatement(query) ;
             pstm.setString(1,user.getName());
@@ -62,6 +61,7 @@ public class UserDao {
                  user.setEmail(set.getString("Email")) ;
                  user.setCreatedAt(set.getTimestamp("CreatedAt")) ;
                  user.setUserId(set.getString("UserId")) ;
+                 user.setImageName(set.getString("Image"));
              }
              
         }catch(SQLException e)
@@ -75,11 +75,12 @@ public class UserDao {
         boolean flag =false ;
         
         try{
-            String query = "update user set Name = ?, Password = ? where UserId = ? " ;
+            String query = "update user set Name = ?, Password = ?, Image = ? where UserId = ? " ;
             PreparedStatement pstm = conn.prepareStatement(query);
             pstm.setString(1,user.getName());
             pstm.setString(2,user.getPassword());
-            pstm.setString(3, user.getUserId());
+            pstm.setString(3, user.getImageName());
+            pstm.setString(4, user.getUserId());
             pstm.executeUpdate();
             flag = true ;
         }

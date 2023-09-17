@@ -13,16 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.tech.blog.entities.User ;
 import com.tech.blog.dao.UserDao ;
 import com.tech.blog.helper.ConnectionProvider;
+import com.tech.blog.helper.FileHelper;
+import java.io.File;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
+import java.io.InputStream  ;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author amarj
  */
+@MultipartConfig
 public class UpdateServlet extends HttpServlet {
 
     /**
@@ -45,16 +51,33 @@ public class UpdateServlet extends HttpServlet {
            String name = request.getParameter("update-user-name");
            String email = request.getParameter("update-user-email");
            String password = request.getParameter("update-user-password");  
-            String userId = request.getParameter("user-id") ;
-               
+           String userId = request.getParameter("user-id") ;
+           
+           HttpSession session = request.getSession() ;
+           User currentUser = (User) session.getAttribute("currentUser") ;
+           
+            Part part = request.getPart("user-photo") ;
+            String fileName = part.getSubmittedFileName() ;
+                   
            Date date = new Date() ;
            Timestamp createdAt = new Timestamp(date.getTime()) ;
            User user = new User(name,email,password,createdAt) ;
            user.setUserId(userId);
+           user.setImageName(fileName) ;
            
            UserDao userDao = new UserDao(ConnectionProvider.getConnection());
            boolean update = userDao.updateUser(user,ConnectionProvider.getConnection());
-         
+           
+           if(update)
+           {
+               if(currentUser.getImageName() != null)
+               {
+                   String oldPath = request.getRealPath("/")+"pics"+File.separator+currentUser.getImageName() ;
+                   FileHelper.deleteFile(oldPath) ;
+               }
+               String path = request.getRealPath("/")+"pics"+File.separator+user.getImageName() ;   
+               boolean uploaded = FileHelper.uploadFile(part.getInputStream(), path);
+           }
            response.sendRedirect("profile.jsp");
         }
         
