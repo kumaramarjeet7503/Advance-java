@@ -4,6 +4,8 @@ import com.tech.blog.dao.PostDao;
 import com.tech.blog.entities.Post;
 import com.tech.blog.entities.User;
 import com.tech.blog.helper.ConnectionProvider;
+import com.tech.blog.helper.FileHelper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -46,21 +48,24 @@ public class PostServlet extends HttpServlet {
                 Part postPic = request.getPart("post-photo");
                 String fileName  = postPic.getSubmittedFileName() ;
                
-                 
-                
             // Get data from session
                 HttpSession session = request.getSession() ;
-                User currentUser = (User) session.getAttribute("currentUser") ;
-                      
+                User currentUser = (User) session.getAttribute("currentUser") ;      
                 int userId = Integer.parseInt(currentUser.getUserId())  ;
-                 out.println(userId);
-               
-                
-//                Create post object and prepairing for post saving
+
+                              
+//              Create post object and prepairing for post saving
                 Post post = new Post(title,content,code,cid,userId,fileName);
                 PostDao postDao = new PostDao();
                 boolean posted = postDao.savePost(ConnectionProvider.getConnection(),post);
-                out.println(posted);
+                
+                if(posted)
+                {
+                    String path = request.getRealPath("/")+"/post"+File.separator+fileName ;
+                    boolean uploader  = FileHelper.uploadFile(postPic.getInputStream(), path) ;
+                    out.println(uploader);
+                }
+                out.println(posted); 
         }
     }
 

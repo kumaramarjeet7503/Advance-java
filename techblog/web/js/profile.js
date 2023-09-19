@@ -18,17 +18,16 @@
        event.preventDefault();
        let form = new FormData(this) ;
        url = "dopost" ;
-       var response = makeAjax(url,form);
-    });
-    
-    function makeAjax(url,data)
-    {
           $.ajax({
             url:url,
-            data : data,
+            data : form,
             method : "POST",
             success:function(response){
-                return response ;
+                if(response)
+                {
+                    $('#dopost')[0].reset() ;
+                    $('#post-success').show() ;
+                }
             },
             error : function(response)
             {
@@ -38,4 +37,5 @@
             processData : false ,
             contentType : false     
         });
-    }
+    });
+    

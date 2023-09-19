@@ -83,7 +83,7 @@
                     <div class="modal-content">
                       <div class="modal-header bg-primary">
                         <h5 class="modal-title text-white" id="profileModalLabel">Profile Overview</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -167,19 +167,18 @@
                     <div class="modal-content">
                       <div class="modal-header bg-primary">
                         <h5 class="modal-title text-white" id="postModalLabel">Post</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
                              
                     <div class="container text-center">
-                       <%  if(msg != null){ %>
-                            <div class="alert <%= msg.getClass() %>" role="alert"></div>
-                            <%  session.removeAttribute("msg"); } %>
+                            <div class="alert alert-success" style="display : none" id="post-success" role="alert">Your post has successfully added</div>
+                  
                         <div id="post-edit">
                             <label  id="post-profile" style="float: left;">Do post your article</label>
-                            <form id="dopost"  action="dopost"  method="post" enctype="multipart/form-data" > 
+                            <form id="dopost"  action="dopost"  method="post" > 
                                         <% 
                                             PostDao postDao = new PostDao() ;
                                             ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
@@ -198,9 +197,6 @@
                                </form>
                         </div>
                     </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                       </div>
                     </div>
                   </div>
