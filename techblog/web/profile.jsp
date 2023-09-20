@@ -81,9 +81,9 @@
                                 <div class="col-md-4">   
                                     
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action active">All Posts</a>
+                                        <a onclick="getPosts(0,this)" class="c-link list-group-item list-group-item-action active">All Posts</a>
                                          <% for(Category cat : categories){ %>
-                                        <a onclick="getPosts(<%= cat.getId() %>)" class="list-group-item list-group-item-action"><%= cat.getName() %></a>
+                                         <a onclick="getPosts(<%= cat.getId() %>,this)"  class="c-link list-group-item list-group-item-action"><%= cat.getName() %></a>
                                         <% }%>
                                       </div>
                                 </div>

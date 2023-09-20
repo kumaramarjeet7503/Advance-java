@@ -1,5 +1,6 @@
 $(document).ready(function(){
-        getPosts(0) ;
+        allPost = $(".c-link")[0] ;
+        getPosts(0,allPost) ;
 });
 
 var  toggle = false ;
@@ -44,14 +45,16 @@ var  toggle = false ;
     });
     
     
-     function getPosts(Cid)
+     function getPosts(Cid,obj)
     {
-            $.ajax({
+        $(".c-link").removeClass("active") ;
+        $.ajax({
         url : "load-posts.jsp",
         data : {cid:Cid},
         success:function(response)
         {
             $('#post-container').html(response);
+            $(obj).addClass("active") ;
         },
         error : function(response)
             {
