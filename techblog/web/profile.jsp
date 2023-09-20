@@ -1,9 +1,3 @@
-<%-- 
-    Document   : profile
-    Created on : Sep 12, 2023, 7:14:42 AM
-    Author     : amarj
---%>
-
 <%@page import="com.tech.blog.entities.Category"%>
 <%@page import="com.tech.blog.helper.ConnectionProvider"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,6 +11,10 @@
             { 
                 response.sendRedirect("login.jsp");
             } 
+
+            PostDao postDao = new PostDao() ;
+            ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
+                                       
         %>
 <!DOCTYPE html>
 <html>
@@ -76,6 +74,30 @@
                         <%= msg.getContent() %>
                       </div>
                     <% session.removeAttribute("msg") ; } %>
+                    
+                    <main>
+                        <div class="container">
+                            <div class="row mt-2">
+                                <div class="col-md-4">   
+                                    
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action active">All Posts</a>
+                                         <% for(Category cat : categories){ %>
+                                        <a href="#" class="list-group-item list-group-item-action"><%= cat.getName() %></a>
+                                        <% }%>
+                                      </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="container text-center" id="post-container">
+                                        <div id="loader">
+                                            <div class="fa fa-refresh fa-4x fa-spin"></div>
+                                            <h3 class="mt-2">Loading... </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
 
                 <!-- Profile  Modal -->
                 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -179,10 +201,7 @@
                         <div id="post-edit">
                             <label  id="post-profile" style="float: left;">Do post your article</label>
                             <form id="dopost"  action="dopost"  method="post" > 
-                                        <% 
-                                            PostDao postDao = new PostDao() ;
-                                            ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
-                                        %>
+
                                    <select name="post-category" class="form-control form-group " >
                                        <option selected disabled>Please select a category</option>
                                        <% for(Category cat : categories){ %>
@@ -202,11 +221,7 @@
                   </div>
                 </div>
                     
-                
-                                   
-        <h1>Your profile</h1>
-        <h3>Email : <%= user.getEmail() %></h3>
-        
+               
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

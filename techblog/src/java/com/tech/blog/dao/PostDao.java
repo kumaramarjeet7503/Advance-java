@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import com.tech.blog.dao.QueryDao ;
 
 public class PostDao {
     public ArrayList getCategory(Connection conn) throws SQLException
@@ -59,4 +61,65 @@ public class PostDao {
         
         return save ;
     }
+    
+    public List<Post> getAllPosts(Connection conn) throws SQLException
+    {   
+        List<Post> postList =new ArrayList<>() ;
+        try
+        {
+            String query = "select * from post" ;
+            String[] values = new String[0] ;
+            ResultSet postResult = QueryDao.executeSelect(query,values,conn) ;
+            
+            while(postResult.next())
+            {                  
+                String tilte =        postResult.getString("Title") ;
+                String content =        postResult.getString("Content") ;
+                String code =        postResult.getString("Code") ;
+                int cid =        postResult.getInt("Cid") ;
+                int userId =        postResult.getInt("UserId") ;
+                String image =        postResult.getString("Image") ;
+
+                Post post = new Post(tilte,content,code,cid,userId,image);
+                postList.add(post) ;
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return postList ;
+    }
+    
+        public List<Post> getPostsByCategory(Connection conn, int cid) throws SQLException
+    {   
+         List<Post> postList =new ArrayList<>() ;
+        try
+        {
+            String query = "select * from post where cid = ?" ;
+             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, cid);
+            ResultSet postResult =   stmt.executeQuery() ;
+            while(postResult.next())
+            {                  
+                String tilte =        postResult.getString("Title") ;
+                String content =        postResult.getString("Content") ;
+                String code =        postResult.getString("Code") ;
+                 cid =        postResult.getInt("Cid") ;
+                int userId =        postResult.getInt("UserId") ;
+                String image =        postResult.getString("Image") ;
+
+                Post post = new Post(tilte,content,code,cid,userId,image);
+                postList.add(post) ;
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return postList ;
+    }
+
 }

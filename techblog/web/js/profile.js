@@ -1,4 +1,19 @@
-    var  toggle = false ;
+$(document).ready(function(){
+    $.ajax({
+        url : "load-posts.jsp",
+        success:function(response)
+        {
+            $('#post-container').html(response);
+        },
+        error : function(response)
+            {
+                console.log(response) ;
+                alert("error");
+            }
+    });
+});
+
+var  toggle = false ;
     $('#profile-toggle').click(function(){
         if(!toggle){
             $('#profile-edit').show() ;
