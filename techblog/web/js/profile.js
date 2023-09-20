@@ -1,16 +1,5 @@
 $(document).ready(function(){
-    $.ajax({
-        url : "load-posts.jsp",
-        success:function(response)
-        {
-            $('#post-container').html(response);
-        },
-        error : function(response)
-            {
-                console.log(response) ;
-                alert("error");
-            }
-    });
+        getPosts(0) ;
 });
 
 var  toggle = false ;
@@ -53,4 +42,22 @@ var  toggle = false ;
             contentType : false     
         });
     });
+    
+    
+     function getPosts(Cid)
+    {
+            $.ajax({
+        url : "load-posts.jsp",
+        data : {cid:Cid},
+        success:function(response)
+        {
+            $('#post-container').html(response);
+        },
+        error : function(response)
+            {
+                console.log(response) ;
+                alert("error");
+            }
+    });
+    }
     

@@ -83,7 +83,7 @@
                                     <div class="list-group">
                                         <a href="#" class="list-group-item list-group-item-action active">All Posts</a>
                                          <% for(Category cat : categories){ %>
-                                        <a href="#" class="list-group-item list-group-item-action"><%= cat.getName() %></a>
+                                        <a onclick="getPosts(<%= cat.getId() %>)" class="list-group-item list-group-item-action"><%= cat.getName() %></a>
                                         <% }%>
                                       </div>
                                 </div>
