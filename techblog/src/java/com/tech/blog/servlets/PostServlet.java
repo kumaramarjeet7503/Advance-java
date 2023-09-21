@@ -52,7 +52,7 @@ public class PostServlet extends HttpServlet {
                 HttpSession session = request.getSession() ;
                 User currentUser = (User) session.getAttribute("currentUser") ;      
                 int userId = Integer.parseInt(currentUser.getUserId())  ;
-
+                
                               
 //              Create post object and prepairing for post saving
                 Post post = new Post(title,content,code,cid,userId,fileName);

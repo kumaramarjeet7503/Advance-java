@@ -68,7 +68,6 @@
                     method : "POST",
                     success:function(response){
                         console.log(response) ;
-                        alert("success");
                         window.open('login.jsp');
                     },
                     error : function(response)

@@ -91,4 +91,25 @@ public class UserDao {
         
         return flag ;
     }
+    
+    public User getUserById(int userId) throws SQLException, ClassNotFoundException
+    {
+        User user = null ;
+        String strUserId = Integer.toString(userId) ;
+        String query = "select * from user where UserId =  " + strUserId ;
+        String[] values =  {} ; 
+          ResultSet set  = QueryDao.executeSelect(query, values, ConnectionProvider.getConnection()) ;
+             if(set.next())
+             {
+                 user = new User() ;
+                 user.setName(set.getString("Name")) ;
+                 user.setPassword(set.getString("Password")) ;
+                 user.setEmail(set.getString("Email")) ;
+                 user.setCreatedAt(set.getTimestamp("CreatedAt")) ;
+                 user.setUserId(set.getString("UserId")) ;
+                 user.setImageName(set.getString("Image"));
+             }
+         
+        return user ;
+    }
 }

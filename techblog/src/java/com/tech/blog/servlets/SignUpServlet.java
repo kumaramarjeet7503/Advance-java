@@ -49,9 +49,9 @@ public class SignUpServlet extends HttpServlet {
            User user = new User(name,email,password,createdAt) ;
         
            UserDao userDao = new UserDao(ConnectionProvider.getConnection()) ;
-//           boolean save = userDao.saveUser(user,ConnectionProvider.getConnection()) ;
-            boolean save1 = true ;
-           if(save1 )
+           boolean save = userDao.saveUser(user,ConnectionProvider.getConnection()) ;
+
+           if(save )
             {
                 out.println("Success");
             } 

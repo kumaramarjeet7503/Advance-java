@@ -1,3 +1,4 @@
+<%@page import="com.tech.blog.dao.UserDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tech.blog.entities.Post"%>
@@ -205,9 +206,17 @@
                                         <div class="card-header bg-primary">
                                             <h4 class="text-white"><%= post.getTitle() %></h4>
                                         </div>
+                                            <% 
+                                                
+                                                UserDao userDao = new UserDao(ConnectionProvider.getConnection()) ;
+                                                User postOwner =  userDao.getUserById(post.getUserId()) ;
+                                            %>
                                         <div class="card-body  p-1" style="padding : 0px">
-                                            <img  class="card-img-top" style="width: 5%;" src="post/<%= post.getImage() %>" alt="Card image cap"></img>
-                                            <p class="mb-0" style=" font-weight: bold;"><%= user.getName()%></p>
+                                            <div>
+                                            <img  class="card-img-top " style="width: 5%; border-radius: 10px" src="pics/<%= postOwner.getImageName() %>" alt="Card image cap"></img>
+                                            </div>
+
+                                            <a class="mb-0" style=" font-weight: bold;"><%= postOwner.getName()%></a>
                                             <p style="font-style: italic; font-size: 15px"><%=  DateFormat.getDateTimeInstance().format(post.getCreatedDate())  %></p>
                                             <img  class="card-img-top " src="post/<%= post.getImage() %>" alt="Card image cap"></img>
                                             <p><%=  post.getContent() %></p>
