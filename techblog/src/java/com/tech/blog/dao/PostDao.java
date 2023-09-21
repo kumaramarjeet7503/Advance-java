@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.tech.blog.dao.QueryDao ;
+import java.sql.Timestamp;
 
 public class PostDao {
     public ArrayList getCategory(Connection conn) throws SQLException
@@ -138,8 +139,9 @@ public class PostDao {
                 int cid =        postResult.getInt("Cid") ;
                 int userId =        postResult.getInt("UserId") ;
                 String image =        postResult.getString("Image") ;
+                Timestamp createdDate = postResult.getTimestamp("CreatedAt");
                 int postId = id;
-                 post = new Post(postId,tilte,content,code,cid,userId,image);
+                 post = new Post(postId,tilte,content,code,cid,userId,image,createdDate);
         }
         }
         catch(Exception e)

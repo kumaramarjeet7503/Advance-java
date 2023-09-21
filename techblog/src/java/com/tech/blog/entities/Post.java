@@ -7,7 +7,7 @@ public class Post {
     private String Title ;
     private String Content ;
     private String Code ;
-    private Timestamp CreatedDate ;
+    private Timestamp CreatedAt ;
     private int Cid ;
     private int UserId ;
     private String Image ;
@@ -20,6 +20,17 @@ public class Post {
         this.Cid = Cid;
         this.UserId = UserId ;
         this.Image = Image ;
+    }
+    
+        public Post(int Id, String Title, String Content, String Code, int Cid, int UserId, String Image,Timestamp CreatedAt) {
+        this.Id = Id;
+        this.Title = Title;
+        this.Content = Content;
+        this.Code = Code;
+        this.Cid = Cid;
+        this.UserId = UserId ;
+        this.Image = Image ;
+        this.CreatedAt = CreatedAt ;
     }
 
     public Post(String Title, String Content, String Code, int Cid, int UserId, String Image) {
@@ -67,11 +78,11 @@ public class Post {
     }
 
     public Timestamp getCreatedDate() {
-        return CreatedDate;
+        return CreatedAt;
     }
 
     public void setCreatedDate(Timestamp CreatedDate) {
-        this.CreatedDate = CreatedDate;
+        this.CreatedAt = CreatedDate;
     }
 
     public int getCid() {

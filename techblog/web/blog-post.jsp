@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tech.blog.entities.Post"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,6 +6,7 @@
 <%@page import="com.tech.blog.helper.ConnectionProvider"%>
 <%@page import="com.tech.blog.dao.PostDao"%>
 <%@page import="com.tech.blog.entities.User"%>
+<%@page import="java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="error.jsp"  %>
         <%
@@ -18,6 +20,7 @@
             ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
 //            Get post on the basis of id
            Post post  = postDao.getPostsById(ConnectionProvider.getConnection(),Integer.parseInt(request.getParameter("pid"))) ;
+           Date date = new Date() ;
            
         %>
 <!DOCTYPE html>
@@ -194,15 +197,20 @@
                   </div>
                 </div>
                         
-                                    <main>
+                 <main>
                         <div class="container">
                             <div class="row mt-2">
                                  <div class="col-md-8 offset-md-2"> 
                                     <div class="card">
-                                        <div class="card-body" style="padding : 0px">
-                                            <img  class="card-img-top" src="post/<%= post.getImage() %>" alt="Card image cap"></img>
-                                            <h4><%= post.getTitle() %></h4>
-                                            <p><%= post.getContent() %></p>
+                                        <div class="card-header bg-primary">
+                                            <h4 class="text-white"><%= post.getTitle() %></h4>
+                                        </div>
+                                        <div class="card-body  p-1" style="padding : 0px">
+                                            <img  class="card-img-top" style="width: 5%;" src="post/<%= post.getImage() %>" alt="Card image cap"></img>
+                                            <p class="mb-0" style=" font-weight: bold;"><%= user.getName()%></p>
+                                            <p style="font-style: italic; font-size: 15px"><%=  DateFormat.getDateTimeInstance().format(post.getCreatedDate())  %></p>
+                                            <img  class="card-img-top " src="post/<%= post.getImage() %>" alt="Card image cap"></img>
+                                            <p><%=  post.getContent() %></p>
                                         </div>
                                         <div class="card-footer bg-primary text-left">
                                             <a href="#" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
