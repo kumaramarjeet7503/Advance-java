@@ -30,6 +30,9 @@ public class Post {
         this.UserId = UserId ;
         this.Image = Image ;
     }
+        public Post() {
+       
+    }
 
     public int getId() {
         return Id;

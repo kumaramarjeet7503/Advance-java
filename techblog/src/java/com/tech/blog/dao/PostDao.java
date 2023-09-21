@@ -79,8 +79,8 @@ public class PostDao {
                 int cid =        postResult.getInt("Cid") ;
                 int userId =        postResult.getInt("UserId") ;
                 String image =        postResult.getString("Image") ;
-
-                Post post = new Post(tilte,content,code,cid,userId,image);
+                int postId = postResult.getInt("Id");
+                Post post = new Post(postId,tilte,content,code,cid,userId,image);
                 postList.add(post) ;
             }
         }
@@ -109,8 +109,8 @@ public class PostDao {
                  cid =        postResult.getInt("Cid") ;
                 int userId =        postResult.getInt("UserId") ;
                 String image =        postResult.getString("Image") ;
-
-                Post post = new Post(tilte,content,code,cid,userId,image);
+                int postId = postResult.getInt("Id");
+                Post post = new Post(postId,tilte,content,code,cid,userId,image);
                 postList.add(post) ;
             }
         }
@@ -120,6 +120,34 @@ public class PostDao {
         }
         
         return postList ;
+    }
+        
+    public Post getPostsById(Connection conn, int id) throws SQLException
+    {   
+         Post post = null ;
+        try
+        {
+            String query = "select * from post where Id = ?" ;
+             PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet postResult =   stmt.executeQuery() ;
+              if(postResult.next())  {
+                String tilte =        postResult.getString("Title") ;
+                String content =        postResult.getString("Content") ;
+                String code =        postResult.getString("Code") ;
+                int cid =        postResult.getInt("Cid") ;
+                int userId =        postResult.getInt("UserId") ;
+                String image =        postResult.getString("Image") ;
+                int postId = id;
+                 post = new Post(postId,tilte,content,code,cid,userId,image);
+        }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return post ;
     }
 
 }

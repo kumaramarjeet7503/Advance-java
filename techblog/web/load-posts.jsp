@@ -26,6 +26,11 @@
                 <h4><%= post.getTitle() %></h4>
                 <p><%= post.getContent() %></p>
             </div>
+            <div class="card-footer bg-primary text-left">
+                <a href="#" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
+                <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-comment" ><span>10</span></i></a>
+                <a href="blog-post.jsp?pid=<%= post.getId() %>" class="btn btn-outline-light btn-sm" style="float : right">Read More</a>
+            </div>
         </div>
     </div>
     <% }%>

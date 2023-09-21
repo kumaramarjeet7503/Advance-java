@@ -1,9 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="com.tech.blog.entities.Post"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.tech.blog.entities.Category"%>
 <%@page import="com.tech.blog.helper.ConnectionProvider"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.tech.blog.entities.Message"%>
-<%@page import="com.tech.blog.entities.User"%>
 <%@page import="com.tech.blog.dao.PostDao"%>
+<%@page import="com.tech.blog.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="error.jsp"  %>
         <%
@@ -15,7 +16,9 @@
 
             PostDao postDao = new PostDao() ;
             ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
-                                       
+//            Get post on the basis of id
+           Post post  = postDao.getPostsById(ConnectionProvider.getConnection(),Integer.parseInt(request.getParameter("pid"))) ;
+           
         %>
 <!DOCTYPE html>
 <html>
@@ -24,11 +27,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/site.css"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>profile</title>
+        <title>Blog post</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="index.jsp">Tech Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -69,38 +71,8 @@
                 </ul>
             </div>
           </nav>
-
-                    <%    Message msg = (Message) session.getAttribute("msg") ; if(msg != null){   %>
-                    <div class="alert <%= msg.getClass() %>" role="alert">
-                        <%= msg.getContent() %>
-                      </div>
-                    <% session.removeAttribute("msg") ; } %>
                     
-                    <main>
-                        <div class="container">
-                            <div class="row mt-2">
-                                <div class="col-md-4">   
-                                    
-                                    <div class="list-group">
-                                        <a onclick="getPosts(0,this)" class="c-link list-group-item list-group-item-action active">All Posts</a>
-                                         <% for(Category cat : categories){ %>
-                                         <a onclick="getPosts(<%= cat.getId() %>,this)"  class="c-link list-group-item list-group-item-action"><%= cat.getName() %></a>
-                                        <% }%>
-                                      </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="container text-center" id="post-container">
-                                        <div id="loader">
-                                            <div class="fa fa-refresh fa-4x fa-spin"></div>
-                                            <h3 class="mt-2">Loading... </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-
-                <!-- Profile  Modal -->
+                        <!-- Profile  Modal -->
                 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -183,8 +155,8 @@
                     </div>
                   </div>
                 </div>
-                    
-                <!--Post Modal-->     
+                                   
+                                   <!--Post Modal-->     
                 <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -221,14 +193,32 @@
                     </div>
                   </div>
                 </div>
-                    
-               
+                        
+                                    <main>
+                        <div class="container">
+                            <div class="row mt-2">
+                                 <div class="col-md-8 offset-md-2"> 
+                                    <div class="card">
+                                        <div class="card-body" style="padding : 0px">
+                                            <img  class="card-img-top" src="post/<%= post.getImage() %>" alt="Card image cap"></img>
+                                            <h4><%= post.getTitle() %></h4>
+                                            <p><%= post.getContent() %></p>
+                                        </div>
+                                        <div class="card-footer bg-primary text-left">
+                                            <a href="#" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
+                                            <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-comment" ><span>10</span></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </main>
+                                   
+                                   
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="js/profile.js"></script>
     </body>
 </html>
-
-
-
