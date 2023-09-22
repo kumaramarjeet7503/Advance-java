@@ -64,3 +64,24 @@ var  toggle = false ;
     });
     }
     
+    function doLike(postId, userId)
+    {
+        var dataObj = {
+            postId : postId,
+            userId : userId ,
+            operation : "like"
+        } ;
+        
+        $.ajax({
+            url : 'like',
+            data : dataObj,
+            success : function(response){
+            },
+            error : function(response)
+            {
+                alert(response) ;
+            }
+        }) ;
+    }
+    
+    

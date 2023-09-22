@@ -218,11 +218,12 @@
 
                                             <a class="mb-0" style=" font-weight: bold;"><%= postOwner.getName()%></a>
                                             <p style="font-style: italic; font-size: 15px"><%=  DateFormat.getDateTimeInstance().format(post.getCreatedDate())  %></p>
-                                            <img  class="card-img-top " src="post/<%= post.getImage() %>" alt="Card image cap"></img>
+                                            <img  class="card-img-top " src="post/<%= post.getImage() %>"   alt="Card image cap"></img>
+                                            
                                             <p><%=  post.getContent() %></p>
                                         </div>
                                         <div class="card-footer bg-primary text-left">
-                                            <a href="#" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
+                                            <a onclick="doLike(<%= post.getId()%>,<%= user.getUserId() %>)" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
                                             <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-comment" ><span>10</span></i></a>
                                         </div>
                                     </div>
