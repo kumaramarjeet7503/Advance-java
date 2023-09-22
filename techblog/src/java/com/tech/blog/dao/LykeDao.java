@@ -31,8 +31,8 @@ public class LykeDao {
         
         try
         {
-            String query = "select count(*) as count from Lyke where PostId = ? and UserId = ? "; 
-             String[] values = { Integer.toString(postId), Integer.toString(userId)} ;
+            String query = "select count(*) as count from Lyke where PostId = "+postId+" and UserId = "+userId+" "; 
+             String[] values = {} ;
             ResultSet result = QueryDao.executeSelect(query, values, ConnectionProvider.getConnection()) ;
             if(result.next())
             {

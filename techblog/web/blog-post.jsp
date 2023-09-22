@@ -1,3 +1,4 @@
+<%@page import="com.tech.blog.dao.LykeDao"%>
 <%@page import="com.tech.blog.dao.UserDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -17,6 +18,7 @@
                 response.sendRedirect("login.jsp");
             } 
 
+            LykeDao dao = new LykeDao() ;
             PostDao postDao = new PostDao() ;
             ArrayList<Category> categories = postDao.getCategory(ConnectionProvider.getConnection()) ;
 //            Get post on the basis of id
@@ -223,7 +225,7 @@
                                             <p><%=  post.getContent() %></p>
                                         </div>
                                         <div class="card-footer bg-primary text-left">
-                                            <a onclick="doLike(<%= post.getId()%>,<%= user.getUserId() %>)" class="btn btn-outline-light btn-sm " ><i class="fa fa-thumbs-up" ><span>10</span></i></a>
+                                            <a onclick="doLike(<%= post.getId()%>,<%= user.getUserId() %>)" class="btn btn-outline-light btn-sm text-white " ><i class="fa fa-thumbs-up" ><span><%= dao.countLikeOnPost(post.getId(),Integer.parseInt(user.getUserId())) %></span></i></a>
                                             <a href="#" class="btn btn-outline-light btn-sm"><i class="fa fa-comment" ><span>10</span></i></a>
                                         </div>
                                     </div>
