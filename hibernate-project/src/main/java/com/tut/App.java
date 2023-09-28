@@ -20,20 +20,25 @@ public class App
     	SessionFactory factory = cfg.buildSessionFactory();
 
         // Creating Student
-//    	Student st = new Student() ;
-//    	st.setId(1);
-//    	st.setName("Amarjeet");
-//    	st.setCity("Mohan Garden");
-//    	
+    	Student st = new Student() ;
+    	st.setId(2);
+    	st.setName("Karishma");
+    	st.setCity("Bardoli");
+//    	Set Certificate with embeddable
+    	Certificate certificate = new Certificate() ;
+    	certificate.setDuration(2.25);
+    	certificate.setCourse("Immigrations");
+    	st.setCertificate(certificate);
     	
 //    	Saving for address
     	Address address = new Address() ;
-    	address.setCity("Johanees berg") ;
-    	address.setStreet("Bolika") ;
-    	address.setPostalCode(12012) ;
+    	address.setCity("Babben") ;
+    	address.setStreet("Lake City") ;
+    	address.setPostalCode(841434) ;
     	address.setBoxNo("3") ;
     	address.setIsActive(true) ;
     	address.setCreatedDate(new Date()) ;
+    	address.setStudentId(2);
     	
     	FileInputStream fis = new FileInputStream("src/main/java/alert.jpg") ;
     	byte[] data = new byte[fis.available()] ;
@@ -46,8 +51,9 @@ public class App
 
     	try 
     	{
-//    		session.persist(address);
-//        	tx.commit(); 
+    		session.persist(st) ;
+    		session.persist(address);
+        	tx.commit(); 
         	
     	}catch(Exception e) 
     	{

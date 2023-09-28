@@ -36,7 +36,17 @@ public class Address {
 	
 	@Lob 
 	private byte[] Image ;
+	private int StudentId ;
 	
+	
+	public int getStudentId() {
+		return StudentId;
+	}
+
+	public void setStudentId(int studentId) {
+		StudentId = studentId;
+	}
+
 	public Address() {
 		
 	}

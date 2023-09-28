@@ -1,16 +1,30 @@
 package com.tut;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+import com.tut.*;
 
 
 @Entity 
 public class Student {
 	
 	@jakarta.persistence.Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id ;
 	private String Name ;
 	private String City ;
+	private Certificate Certificate ;
 	
+	public Certificate getCertificate() {
+		return Certificate;
+	}
+
+	public void setCertificate(Certificate certificate) {
+		this.Certificate = certificate;
+	}
+
 	public Student(int Id, String Name ,String City) 
 	{
 		this.Id = Id ;
