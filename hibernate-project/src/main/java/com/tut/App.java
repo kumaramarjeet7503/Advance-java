@@ -46,8 +46,8 @@ public class App
 
     	try 
     	{
-    		session.persist(address);
-        	tx.commit(); 
+//    		session.persist(address);
+//        	tx.commit(); 
         	
     	}catch(Exception e) 
     	{
