@@ -14,5 +14,7 @@
     <mapping class="com.tut.Student" />
      <mapping class="com.tut.Address" />
       <mapping class="com.tut.Certificate" />
+       <mapping class="com.tut.Question" />
+        <mapping class="com.tut.Answer" />
     </session-factory>
     </hibernate-configuration>
