@@ -11,7 +11,7 @@ import com.tut.*;
 public class Student {
 	
 	@jakarta.persistence.Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id ;
 	private String Name ;
 	private String City ;

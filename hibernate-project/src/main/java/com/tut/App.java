@@ -21,7 +21,7 @@ public class App
 
         // Creating Student
     	Student st = new Student() ;
-    	st.setId(2);
+//    	st.setId(1);
     	st.setName("Karishma");
     	st.setCity("Bardoli");
 //    	Set Certificate with embeddable
@@ -38,7 +38,7 @@ public class App
     	address.setBoxNo("3") ;
     	address.setIsActive(true) ;
     	address.setCreatedDate(new Date()) ;
-    	address.setStudentId(2);
+    	address.setStudentId(1);
     	
     	FileInputStream fis = new FileInputStream("src/main/java/alert.jpg") ;
     	byte[] data = new byte[fis.available()] ;
@@ -60,6 +60,7 @@ public class App
     		e.printStackTrace();
     	}
     	session.close(); 
+    	factory.close();
     	
      }
 

@@ -1,5 +1,7 @@
 package com.tut;
 
+import java.util.List;
+
 import org.hibernate.*;
 
 import jakarta.persistence.*;
@@ -12,9 +14,8 @@ public class Question {
 	private int Id ;
 	private String Description ;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "AnswerId")
-	private Answer Answer ;
+	@OneToMany(mappedBy ="question")
+	private List<Answer> Answer ;
 	
 	public String getDescription() {
 		return Description;
@@ -24,11 +25,11 @@ public class Question {
 		Description = description;
 	}
 
-	public Answer getAnswerId() {
+	public List<Answer> getAnswerId() {
 		return Answer;
 	}
 
-	public void setAnswerId(Answer answerId) {
+	public void setAnswerId(List<Answer> answerId) {
 		Answer = answerId;
 	}
 
