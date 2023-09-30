@@ -14,7 +14,7 @@ public class Question {
 	private int Id ;
 	private String Description ;
 	
-	@OneToMany(mappedBy ="question")
+	@OneToMany(mappedBy ="question",fetch=FetchType.EAGER)
 	private List<Answer> Answer ;
 	
 	public String getDescription() {

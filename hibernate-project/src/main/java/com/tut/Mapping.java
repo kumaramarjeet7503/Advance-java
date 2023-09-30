@@ -42,6 +42,10 @@ public class Mapping {
 		answers.add(ans3);
 		q1.setAnswerId(answers);
 		
+		// Fetch Data from table
+		Question ques = session.get(Question.class,1) ;
+		System.out.println(ques);
+		
 		Transaction transaction = session.beginTransaction() ;
 		
 		try 

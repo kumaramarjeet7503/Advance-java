@@ -12,7 +12,7 @@ public class Many {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void main(String[] args) {
+	private static void main(String[] args) {
 		
 		Configuration cnf = new Configuration() ;
 		cnf.configure("hibernate.cfg.xml");
