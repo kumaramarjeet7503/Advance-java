@@ -21,19 +21,19 @@ public class Mapping {
 		
 //		 Set Question
 		Question q1 = new Question() ;
-		q1.setDescription("What is Marraige ?");
+		q1.setDescription("What is Java ?");
 	
 		
 		Answer ans = new Answer() ;
-		ans.setDescription("Marraige is when two person tie know with both.");
+		ans.setDescription("Java is a programming language.");
 		ans.setQuestion(q1);
 		
 		Answer ans2 = new Answer() ;
-		ans2.setDescription("Have childerns.");
+		ans2.setDescription("It is the static language.");
 		ans2.setQuestion(q1);
 	
 		Answer ans3 = new Answer() ;
-		ans3.setDescription("Live happily with both.");
+		ans3.setDescription("It can be used by spring hibernate .");
 		ans3.setQuestion(q1);
 		
 		List<Answer> answers = new ArrayList() ;
