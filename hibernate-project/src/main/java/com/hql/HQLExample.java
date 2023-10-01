@@ -20,20 +20,24 @@ public class HQLExample {
 		Transaction t = session.beginTransaction() ;
 		String query = "from Employee where Name = 'kamlesh'" ;
 		String delQuery = "delete from Employee where Name = 'kamlesh'" ;
+		String updateQuery = "update Employee set Name = 'Alia' where Id=: id" ;
 		
-		Query hql =  session.createQuery(delQuery) ;
+		Query hql =  session.createQuery(updateQuery) ;
+		hql.setParameter("id", 1) ;
 		
 //		Create query 
-//	 	List<Employee> emp = hql.list() ;
-//	 	for(Employee e : emp) 
-//	 	{
-//	 		System.out.println(e.getName()); 
-//	 		System.out.println(e.getEId()); 
-//	 	}
+	 	List<Employee> emp = hql.list() ;
+	 	for(Employee e : emp) 
+	 	{
+	 		System.out.println(e.getName()); 
+	 		System.out.println(e.getEId()); 
+	 	}
 		
-//		Delete query
+//		Delete and update query
 		int deletedItem =  hql.executeUpdate() ;
 		System.out.println(deletedItem);
+		
+
 		
 		
 		t.commit();
