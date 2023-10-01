@@ -2,6 +2,10 @@ package com.tut;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +18,8 @@ import jakarta.persistence.Transient;
 
 @Entity 
 @Table(name="address")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Address {
 
 	@jakarta.persistence.Id

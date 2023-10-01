@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+//import org.hibernate.cache.ehcache.internal.EhcacheRegionFactory ;
+
 
 public class Mapping {
 
@@ -21,19 +23,19 @@ public class Mapping {
 		
 //		 Set Question
 		Question q1 = new Question() ;
-		q1.setDescription("What is Sports ?");
+		q1.setDescription("What is Bowl ?");
 	
 		
 		Answer ans = new Answer() ;
-		ans.setDescription("Sports is a technique.");
+		ans.setDescription("Bowl in which fish lives.");
 		ans.setQuestion(q1);
 		
 		Answer ans2 = new Answer() ;
-		ans2.setDescription("It is used for making body fit.");
+		ans2.setDescription("It is used for storing water.");
 		ans2.setQuestion(q1);
 	
 		Answer ans3 = new Answer() ;
-		ans3.setDescription("It can be used by Competition .");
+		ans3.setDescription("It can be used for showcase also .");
 		ans3.setQuestion(q1);
 		
 		List<Answer> answers = new ArrayList() ;

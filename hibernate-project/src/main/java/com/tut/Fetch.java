@@ -18,9 +18,12 @@ public class Fetch {
 		Session session = factory.openSession() ;
 		Address ad =  session.get(Address.class,1) ;
 	    System.out.println(ad.getCity());
+
+	    session.close();
 	    
-	    Address adLoad = session.load(Address.class, 1) ;
-	    System.out.println(adLoad);
+	    Session session1 = factory.openSession() ;
+	    Address ad1 =  session1.get(Address.class,1) ;
+	    System.out.println(ad1.getCity());
 		
 	}
 
