@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import com.tut.Answer;
 import com.tut.Employee;
 
 public class HQLExample {
@@ -23,6 +25,7 @@ public class HQLExample {
 		String delQuery = "delete from Employee where Name = 'kamlesh'" ;
 		String updateQuery = "update Employee set Name = 'Alia' where Id=: id" ;
 		String joinQuery = "select q.Description, a.Description from Question q inner join Answer a " ;
+		String sqlQuery = "select * from answer" ;
 		
 		Query hql =  session.createQuery(joinQuery) ;
 		hql.setParameter("id", 1) ;
@@ -43,6 +46,15 @@ public class HQLExample {
 		List<Object[]> questions = hql.getResultList() ;
 		for(Object[] arr : questions) {
 			System.out.println(Arrays.toString(arr));
+		}
+		
+//		Get data via sql query
+		NativeQuery<Answer> nq = session.createNativeQuery(sqlQuery, Answer.class);
+		List<Answer> nqAnswers =  nq.list() ;
+		
+		for(Answer ans : nqAnswers) 
+		{
+			System.out.println(ans.getDescription());
 		}
 		
 		t.commit();
