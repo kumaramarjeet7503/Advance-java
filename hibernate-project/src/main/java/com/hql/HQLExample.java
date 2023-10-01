@@ -1,5 +1,6 @@
 package com.hql;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.*;
@@ -21,8 +22,9 @@ public class HQLExample {
 		String query = "from Employee where Name = 'kamlesh'" ;
 		String delQuery = "delete from Employee where Name = 'kamlesh'" ;
 		String updateQuery = "update Employee set Name = 'Alia' where Id=: id" ;
+		String joinQuery = "select q.Description, a.Description from Question q inner join Answer a " ;
 		
-		Query hql =  session.createQuery(updateQuery) ;
+		Query hql =  session.createQuery(joinQuery) ;
 		hql.setParameter("id", 1) ;
 		
 //		Create query 
@@ -37,8 +39,11 @@ public class HQLExample {
 		int deletedItem =  hql.executeUpdate() ;
 		System.out.println(deletedItem);
 		
-
-		
+//		 Join query result
+		List<Object[]> questions = hql.getResultList() ;
+		for(Object[] arr : questions) {
+			System.out.println(Arrays.toString(arr));
+		}
 		
 		t.commit();
 		
