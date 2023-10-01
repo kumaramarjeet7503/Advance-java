@@ -16,16 +16,27 @@ public class HQLExample {
 		Configuration cnf = new Configuration() ;
 		cnf.configure("hibernate.cfg.xml");
 		SessionFactory factory = cnf.buildSessionFactory() ;
-		
-		String query = "from Employee where Name = 'kamlesh'" ;
 		Session session = factory.openSession() ;
-		Query hql =  session.createQuery(query) ;
-	 	List<Employee> emp = hql.list() ;
-	 	for(Employee e : emp) 
-	 	{
-	 		System.out.println(e.getName()); 
-	 		System.out.println(e.getEId()); 
-	 	}
+		Transaction t = session.beginTransaction() ;
+		String query = "from Employee where Name = 'kamlesh'" ;
+		String delQuery = "delete from Employee where Name = 'kamlesh'" ;
+		
+		Query hql =  session.createQuery(delQuery) ;
+		
+//		Create query 
+//	 	List<Employee> emp = hql.list() ;
+//	 	for(Employee e : emp) 
+//	 	{
+//	 		System.out.println(e.getName()); 
+//	 		System.out.println(e.getEId()); 
+//	 	}
+		
+//		Delete query
+		int deletedItem =  hql.executeUpdate() ;
+		System.out.println(deletedItem);
+		
+		
+		t.commit();
 		
 	}
 
