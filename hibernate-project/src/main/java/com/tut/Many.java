@@ -1,7 +1,7 @@
 package com.tut;
 
-import java.util.*;
-
+import java.util.List;
+import java.util.ArrayList;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
@@ -46,7 +46,7 @@ public class Many {
 			p1.setPId(1);
 			p1.setName("Java");
 //			
-			List emp = new ArrayList<>();
+			List emp = new ArrayList();
 			emp.add(e3);
 			
 			List project = new ArrayList() ;
