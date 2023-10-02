@@ -1,5 +1,7 @@
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page isELIgnored="false" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,11 +26,41 @@
 		<div class="row">
 		<div class="col-md-2">
 			<ul class="list-group">
-			  <li class="list-group-item active">Add order</li>
-			  <li class="list-group-item">View order</li>
+			 <a class="list-group-item active" href='<c:url value='/home'></c:url>'   >All order</a>
+			 <a class="list-group-item " href='<c:url value='/add'></c:url>'   >Add order</a>
+			 <a class="list-group-item " href='<c:url value='/view'></c:url>'   >View order</a>
 			</ul>
 		</div>
-		<div class="col-md-10 text-center"> <h2>Content</h2> </div>
+		<div class="col-md-10 ">
+		
+			 <h2>Content</h2>
+			 <c:if  test="${page == 'home'}" >
+			 	<h4>All Order</h4>
+			 </c:if>
+			 <c:if  test="${page == 'view'}" >
+			 	<h4>View Order</h4>
+			 </c:if>
+			 <c:if  test="${page == 'add'}" >
+			 	<h4>Add Order</h4>
+			 	
+			 <form:form action="save-order" method="POST" modelAttribute="order"  >
+			 	<div class="form-group">
+			 		<form:input path="ReferenceNumber" cssClass="form-control" />
+			 		</div>
+			 			<div class="form-group">
+			 		<form:textarea path="Description" cssClass="form-control"  />
+			 		</div>
+			 			<div class="form-group">
+			 		<form:input path="Amount" cssClass="form-control" />
+			 		</div>
+			 		
+			 		<div class="text-center">
+			 			<button  type="submit" class="btn btn-primary" >Add</button>
+			 		</div>
+			 	</form:form>
+			 	
+			 </c:if>
+		</div>
 		
 		</div>
 
