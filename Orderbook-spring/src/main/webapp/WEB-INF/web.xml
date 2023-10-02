@@ -14,4 +14,7 @@
 		<servlet-name>order</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<listener>
+		<listener-class>com.listener.MyListener</listener-class>
+	</listener>
 </web-app>

@@ -22,6 +22,9 @@
 	<div class="container">
 		<div class="text-center mb-3">
 			<h1>Orderbook</h1>
+			<c:if test="${not empty message }" >
+			<label class="alert alert-success">It's done</label>
+			</c:if>
 		</div>
 		<div class="row">
 		<div class="col-md-2">
@@ -36,9 +39,35 @@
 			 <h2>Content</h2>
 			 <c:if  test="${page == 'home'}" >
 			 	<h4>All Order</h4>
+			 	
+			 	<c:forEach items="${orders}" var="order">
+			 	<div class="card">
+			 	
+			 		<div class="card-body" style="    background: aquamarine;	">
+			 		<h4><c:out value="${order.getReferenceNumber()}"></c:out> </h4>
+			 				<label><c:out value="${order.getDescription()}"></c:out> </label>
+			 				<label><c:out value="${order.getAmount()}"></c:out> </label>
+			 		</div>
+			 		
+			 	</div>
+			 	
+			 	</c:forEach>
+			 	
 			 </c:if>
 			 <c:if  test="${page == 'view'}" >
 			 	<h4>View Order</h4>
+			 				 	<c:forEach items="${orders}" var="order">
+						 	<div class="card">
+			 	
+			 		<div class="card-body" style="    background: aquamarine;	">
+			 		<h4><c:out value="${order.getReferenceNumber()}"></c:out> </h4>
+			 				<label><c:out value="${order.getDescription()}"></c:out> </label>
+			 				<label><c:out value="${order.getAmount()}"></c:out> </label>
+			 		</div>
+			 		
+			 	</div>
+			 	
+			 	</c:forEach>
 			 </c:if>
 			 <c:if  test="${page == 'add'}" >
 			 	<h4>Add Order</h4>

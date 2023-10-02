@@ -1,5 +1,10 @@
 package com.controllers;
 
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,9 +16,15 @@ import com.entities.Order;
 @Controller
 public class HomeController {
 
+	@Autowired
+	private ServletContext context ;
+	
 	@RequestMapping("/home")
 	public String Home(Model model) 
 	{
+		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+		model.addAttribute("orders",contextOrder) ;
+		
 		String page ="home" ;
 		model.addAttribute("page", page) ;
 		return "home" ;
@@ -32,6 +43,8 @@ public class HomeController {
 	@RequestMapping("/view")
 	public String View(Model model) 
 	{
+		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+		model.addAttribute("orders",contextOrder) ;
 		String page ="view" ;
 		model.addAttribute("page", page) ;
 		return "home" ;
@@ -40,8 +53,11 @@ public class HomeController {
 	@RequestMapping(value="/save-order",method=RequestMethod.POST)
 	public String Save(@ModelAttribute("order") Order o ,Model model) 
 	{
-		System.out.println(o);
-		String page ="view" ;
+		
+		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+		contextOrder.add(o) ;
+		model.addAttribute("message","successfully added");
+		String page ="home" ;
 		model.addAttribute("page", page) ;
 		return "home" ;
 	}
