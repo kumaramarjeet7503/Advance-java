@@ -1,7 +1,17 @@
 package com.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="myorder")
 public class Order {
 
+	@javax.persistence.Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int Id ;
 	private String ReferenceNumber ;
 	private String Description ;
 	private int Amount ;

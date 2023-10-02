@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import com.dao.*;
 import com.entities.Order;
 
 @Controller
@@ -19,10 +19,14 @@ public class HomeController {
 	@Autowired
 	private ServletContext context ;
 	
+	@Autowired
+	OrderDao orderDao ;
+	
 	@RequestMapping("/home")
 	public String Home(Model model) 
 	{
-		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+//		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+		List<Order> contextOrder = this.orderDao.getAll() ;
 		model.addAttribute("orders",contextOrder) ;
 		
 		String page ="home" ;
@@ -43,7 +47,8 @@ public class HomeController {
 	@RequestMapping("/view")
 	public String View(Model model) 
 	{
-		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+//		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+		List<Order> contextOrder = this.orderDao.getAll() ;
 		model.addAttribute("orders",contextOrder) ;
 		String page ="view" ;
 		model.addAttribute("page", page) ;
@@ -54,8 +59,11 @@ public class HomeController {
 	public String Save(@ModelAttribute("order") Order o ,Model model) 
 	{
 		
-		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
-		contextOrder.add(o) ;
+//		List<Order> contextOrder = (List<Order>)context.getAttribute("orders");
+//		contextOrder.add(o) ;
+		
+		this.orderDao.save(o) ;
+		
 		model.addAttribute("message","successfully added");
 		String page ="home" ;
 		model.addAttribute("page", page) ;
